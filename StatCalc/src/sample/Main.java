@@ -26,13 +26,11 @@ import java.util.ArrayList;
 
 public class Main extends Application
 {
-    private Button enterButtonX, clearArrayButton, meanButton, modeButton, rangeButton, medianButton, stdButton, createBoxWhiskerButton, createHistogramButton, enterButtonY, createScatterButton;
     private Pane menuPane, boxWhiskerPane, histogramPane, scatterPlotPane;
     private Scene menuScene, boxWhiskerScene, histogramScene, scatterPlotScene;
     private TextField userInputTextFieldX, userInputTextFieldY;
     private TextArea userInputTextArea, outputTextArea, userInputTextAreaY;
     private ArrayList<Double> userInputtedArrayListX, userInputtedArrayListY;
-    private HBox arithmeticRow, dataInputRowX, dataInputRowY;
     private VBox menuColumn;
 
     private StatCalcLogic statCalcX;
@@ -71,10 +69,10 @@ public class Main extends Application
 
     public void setupGUIComponents(Stage primaryStage)
     {
-        dataInputRowX = new HBox();
-        arithmeticRow = new HBox();
+        HBox dataInputRowX = new HBox();
+        HBox arithmeticRow = new HBox();
         menuColumn = new VBox();
-        dataInputRowY = new HBox();
+        HBox dataInputRowY = new HBox();
         menuColumn.setLayoutX(10);
         menuColumn.setLayoutY(10);
 
@@ -89,42 +87,33 @@ public class Main extends Application
         outputTextArea.setMaxWidth(280);
         outputTextArea.setMaxHeight(10);
 
-        enterButtonX = new Button("Enter Data (X)");
+        Button enterButtonX = new Button("Enter Data (X)");
         enterButtonX.setOnAction(event ->
         {
-            try
-            {
-                userInputtedArrayListX.add(Double.parseDouble(userInputTextFieldX.getText()));
-                userInputTextArea.setText(userInputtedArrayListX.toString());
-                userInputTextFieldX.clear();
-            }
-            catch (Exception e)
-            {
-
-            }
+            userInputtedArrayListX.add(Double.parseDouble(userInputTextFieldX.getText()));
+            userInputTextArea.setText(userInputtedArrayListX.toString());
+            userInputTextFieldX.clear();
         });
 
-        clearArrayButton = new Button("Clear Data (X and Y)");
+        Button clearArrayButton = new Button("Clear Data (X and Y)");
         clearArrayButton.setOnAction(event ->
         {
             userInputTextArea.setText("CLEARED");
             userInputTextAreaY.setText("CLEARED");
-            userInputtedArrayListX.add(0.0);
-            userInputtedArrayListY.add(0.0);
             userInputtedArrayListY.clear();
             userInputtedArrayListX.clear();
         });
 
         dataInputRowX.getChildren().addAll(userInputTextFieldX, enterButtonX, clearArrayButton);
 
-        meanButton = new Button("Mean");
+        Button meanButton = new Button("Mean");
         meanButton.setOnAction(event ->
         {
             statCalcX.setData(userInputtedArrayListX);
             outputTextArea.setText(statCalcX.calcMean() + "");
         });
 
-        modeButton = new Button("Mode");
+        Button modeButton = new Button("Mode");
         modeButton.setOnAction(event ->
         {
             statCalcX.setData(userInputtedArrayListX);
@@ -134,28 +123,28 @@ public class Main extends Application
                 outputTextArea.setText("Such mode doesn't exist!");
         });
 
-        medianButton = new Button("Median");
+        Button medianButton = new Button("Median");
         medianButton.setOnAction(event ->
         {
             statCalcX.setData(userInputtedArrayListX);
             outputTextArea.setText(statCalcX.calcMedian() + "");
         });
 
-        rangeButton = new Button("Range");
+        Button rangeButton = new Button("Range");
         rangeButton.setOnAction(event ->
         {
             statCalcX.setData(userInputtedArrayListX);
             outputTextArea.setText(statCalcX.calcRange() + "");
         });
 
-        stdButton = new Button("STD");
+        Button stdButton = new Button("STD");
         stdButton.setOnAction(event ->
         {
             statCalcX.setData(userInputtedArrayListX);
             outputTextArea.setText(statCalcX.calcSTD() + "");
         });
 
-        createBoxWhiskerButton = new Button("Create Box and Whisker Plot");
+        Button createBoxWhiskerButton = new Button("Create Box and Whisker Plot");
         createBoxWhiskerButton.setOnAction(event ->
         {
             setupBoxWhiskerScene(primaryStage);
@@ -169,45 +158,37 @@ public class Main extends Application
 
         TextField histoTextField = new TextField();
 
-        createHistogramButton = new Button("Create Histogram");
+        Button createHistogramButton = new Button("Create Histogram");
         createHistogramButton.setOnAction(event ->
         {
             try
             {
                 setupHistogramScene(primaryStage, Integer.parseInt(histoTextField.getText()));
-            }
-            catch (Exception e)
+            } catch (Exception e)
             {
                 setupHistogramScene(primaryStage, 10);
             }
             primaryStage.setScene(histogramScene);
         });
 
-        histoHBox.getChildren().addAll(histoLabel,histoTextField, createHistogramButton);
+        histoHBox.getChildren().addAll(histoLabel, histoTextField, createHistogramButton);
 
         userInputTextFieldY = new TextField();
         userInputTextFieldY.setMaxWidth(80);
 
-        enterButtonY = new Button("Enter Data (Y)");
+        Button enterButtonY = new Button("Enter Data (Y)");
         userInputTextAreaY = new TextArea("Display y data");
         userInputTextAreaY.setMaxWidth(280);
         userInputTextAreaY.setMaxHeight(10);
         enterButtonY.setOnAction(event ->
         {
-            try
-            {
-                userInputtedArrayListY.add(Double.parseDouble(userInputTextFieldY.getText()));
-                userInputTextAreaY.setText(userInputtedArrayListY.toString());
-                userInputTextFieldY.clear();
-            }
-            catch (Exception e)
-            {
-
-            }
+            userInputtedArrayListY.add(Double.parseDouble(userInputTextFieldY.getText()));
+            userInputTextAreaY.setText(userInputtedArrayListY.toString());
+            userInputTextFieldY.clear();
         });
         dataInputRowY.getChildren().addAll(userInputTextFieldY, enterButtonY);
 
-        createScatterButton = new Button("Create Scatterplot from X and Y");
+        Button createScatterButton = new Button("Create Scatterplot from X and Y");
         createScatterButton.setOnAction(event ->
         {
             setupScatterPlot(primaryStage);
@@ -280,8 +261,7 @@ public class Main extends Application
             Line bottomIQRLine = new Line(q1Pos, y - 30, q3Pos, y - 30);
 
             boxWhiskerPane.getChildren().addAll(middleLineRight, middleLineLeft, minLine, medianLine, maxLine, q1Line, medianLabel, minLabel, maxLabel, q1Label, q3Line, q3Label, topIQRLine, bottomIQRLine);
-        }
-        else
+        } else
         {
             Label errorLabel = new Label("ERROR, PLEASE MAKE SURE YOUR\nX HAS 2 OR MORE ELEMENTS");
             errorLabel.setFont(Font.font("Comic Sans MS", 30));
@@ -293,7 +273,7 @@ public class Main extends Application
         boxWhiskerPane.getChildren().add(backButton_box);
     }
 
-    public void setupHistogramScene(Stage primaryStage, int bars_In)
+    public void setupHistogramScene(Stage primaryStage, int bars)
     {
         Button backButton_histo = new Button("<--- Back to menu");
         backButton_histo.setOnAction(event ->
@@ -312,7 +292,7 @@ public class Main extends Application
             double maxPosY = 420;
 
             statCalcX.setData(userInputtedArrayListX);
-            int bars = bars_In;
+            double[] data = statCalcX.getData();
             double intervals = statCalcX.calcRange() / bars;
             Line xAxisLine = new Line(minPosX, maxPosY, maxPosX, maxPosY);
             Line yAxisLine = new Line(minPosX, maxPosY, minPosX, minPosY);
@@ -320,65 +300,51 @@ public class Main extends Application
             Rectangle[] barArray = new Rectangle[bars];
             Label[] barLabelArray = new Label[bars];
             int[] occurencesOverIntervals = new int[bars];
-            int occurences;
 
-            for(int i = 0; i < bars; i++)
+            for (double num : data)
             {
-                occurences = 0;
-                for (int j = 0; j < statCalcX.getData().length; j++)
+                try
                 {
-                    if (statCalcX.getData()[j] >= statCalcX.getData()[0] + i * intervals && statCalcX.getData()[j] < statCalcX.getData()[0] + i * intervals + intervals)
-                        occurences++;
-                }
-                occurencesOverIntervals[i] = occurences;
-            }
-            occurences = 0;
-
-            for (int i = statCalcX.getData().length - 1; i >= 0; i--)
-            {
-                if(statCalcX.getData()[i] == statCalcX.getData()[statCalcX.getData().length-1])
-                    occurences++;
-                else
+                    occurencesOverIntervals[(int) ((num) / intervals)]++;
+                } catch (Exception e)
                 {
-                    occurencesOverIntervals[occurencesOverIntervals.length-1] += occurences;
-                    break;
+                    occurencesOverIntervals[occurencesOverIntervals.length - 1]++;
                 }
             }
+
+            int maxoccurences = 0;
+            for (int i = 0; i < occurencesOverIntervals.length; i++)
+            {
+                if (maxoccurences < occurencesOverIntervals[i])
+                    maxoccurences = occurencesOverIntervals[i];
+            }
+
+            double heightScaling = (maxPosY - minPosY) / maxoccurences;
 
             for (int i = 0; i < bars; i++)
             {
-                barArray[i] = new Rectangle(minPosX + (double)i/bars * (maxPosX-minPosX), maxPosY - 29* occurencesOverIntervals[i], (maxPosX - minPosX)/(bars), 29*occurencesOverIntervals[i]);
-                barLabelArray[i] = new Label("" + (float)(statCalcX.getData()[0] + i * intervals));
+                barArray[i] = new Rectangle(minPosX + (double) i / bars * (maxPosX - minPosX), maxPosY - 29 * occurencesOverIntervals[i], (maxPosX - minPosX) / (bars), 29 * occurencesOverIntervals[i]);
+                barLabelArray[i] = new Label("" + (float) (statCalcX.getData()[0] + i * intervals));
                 barLabelArray[i].setLayoutY(maxPosY);
-                barLabelArray[i].setLayoutX(minPosX + (double)i/bars * (maxPosX-minPosX) - 6);
+                barLabelArray[i].setLayoutX(minPosX + (double) i / bars * (maxPosX - minPosX) - 6);
                 histogramPane.getChildren().addAll(barArray[i], barLabelArray[i]);
                 barArray[i].setFill(Paint.valueOf("#F52887"));
                 barArray[i].setStroke(Paint.valueOf("BLACK"));
             }
 
-            Label lastNumLabel = new Label(statCalcX.getData()[statCalcX.getData().length-1] + "");
+            Label lastNumLabel = new Label(statCalcX.getData()[statCalcX.getData().length - 1] + "");
             lastNumLabel.setLayoutY(maxPosY);
             lastNumLabel.setLayoutX(maxPosX - 6);
-
-            int maxoccurences = 0;
-            for (int i = 0; i < occurencesOverIntervals.length; i++)
-            {
-                if(maxoccurences < occurencesOverIntervals[i])
-                {
-                    maxoccurences = occurencesOverIntervals[i];
-                }
-            }
 
             for (int i = 0; i <= maxoccurences; i++)
             {
                 Label yAxisLabel = new Label(i + "-");
-                yAxisLabel.setLayoutX(minPosX-10);
-                yAxisLabel.setLayoutY(maxPosY - i *29-10);
+                yAxisLabel.setLayoutX(minPosX - 10);
+                yAxisLabel.setLayoutY(maxPosY - i * 29 - 10);
                 histogramPane.getChildren().add(yAxisLabel);
             }
             histogramPane.getChildren().addAll(xAxisLine, yAxisLine, lastNumLabel);
-        }
-        else
+        } else
         {
             Label errorLabel = new Label("ERROR, PLEASE MAKE SURE YOUR\nX ACTUALLY HAS DATA");
             errorLabel.setFont(Font.font("Comic Sans MS", 30));
@@ -402,24 +368,24 @@ public class Main extends Application
         backButton_scatter.setLayoutX(10);
         backButton_scatter.setLayoutY(10);
 
-        if(userInputtedArrayListX.size() == userInputtedArrayListY.size() && !userInputtedArrayListY.isEmpty())
+        if (userInputtedArrayListX.size() == userInputtedArrayListY.size() && !userInputtedArrayListY.isEmpty())
         {
             statCalcX.setData(userInputtedArrayListX);
             StatCalcLogic statCalcY = new StatCalcLogic(userInputtedArrayListY);
 
             NumberAxis xAxis = new NumberAxis();
-            xAxis.setUpperBound(statCalcX.getData()[statCalcX.getData().length-1]);
+            xAxis.setUpperBound(statCalcX.getData()[statCalcX.getData().length - 1]);
             xAxis.setLowerBound(statCalcX.getData()[0]);
             xAxis.setAutoRanging(false);
             NumberAxis yAxis = new NumberAxis();
-            yAxis.setUpperBound(statCalcY.getData()[statCalcY.getData().length-1]);
+            yAxis.setUpperBound(statCalcY.getData()[statCalcY.getData().length - 1]);
             yAxis.setLowerBound(statCalcY.getData()[0]);
             yAxis.setAutoRanging(false);
 
             ScatterChart scatterChart = new ScatterChart(xAxis, yAxis);
             XYChart.Series series = new XYChart.Series();
 
-            double bconst = statCalcX.calcCorrelationCoeff(statCalcY) * statCalcY.calcSTD()/statCalcX.calcSTD();
+            double bconst = statCalcX.calcCorrelationCoeff(statCalcY) * statCalcY.calcSTD() / statCalcX.calcSTD();
             double a = statCalcY.calcMean() - bconst * statCalcX.calcMean();
 
             for (int i = 0; i < userInputtedArrayListY.size(); i++)
@@ -435,11 +401,12 @@ public class Main extends Application
             XYChart.Series seriesBestFit = new XYChart.Series();
 
             seriesBestFit.getData().add(new XYChart.Data<>(statCalcX.getData()[0], statCalcX.getData()[0] * bconst + a));
-            seriesBestFit.getData().add(new XYChart.Data<>(statCalcX.getData()[statCalcX.getData().length-1], statCalcX.getData()[statCalcX.getData().length-1] * bconst + a));
+            seriesBestFit.getData().add(new XYChart.Data<>(statCalcX.getData()[statCalcX.getData().length - 1], statCalcX.getData()[statCalcX.getData().length - 1] * bconst + a));
+            seriesBestFit.setName("Y = " + (float)a + " + " +(float)bconst + "X");
             lineChart.getData().addAll(seriesBestFit);
             lineChart.setOpacity(.6);
 
-            scatterPlotPane.getChildren().addAll(scatterChart,lineChart);
+            scatterPlotPane.getChildren().addAll(scatterChart, lineChart);
         }
         else
         {
