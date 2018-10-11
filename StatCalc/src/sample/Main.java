@@ -261,7 +261,8 @@ public class Main extends Application
             Line bottomIQRLine = new Line(q1Pos, y - 30, q3Pos, y - 30);
 
             boxWhiskerPane.getChildren().addAll(middleLineRight, middleLineLeft, minLine, medianLine, maxLine, q1Line, medianLabel, minLabel, maxLabel, q1Label, q3Line, q3Label, topIQRLine, bottomIQRLine);
-        } else
+        }
+        else
         {
             Label errorLabel = new Label("ERROR, PLEASE MAKE SURE YOUR\nX HAS 2 OR MORE ELEMENTS");
             errorLabel.setFont(Font.font("Comic Sans MS", 30));
@@ -342,7 +343,8 @@ public class Main extends Application
                 histogramPane.getChildren().add(yAxisLabel);
             }
             histogramPane.getChildren().addAll(xAxisLine, yAxisLine, lastNumLabel);
-        } else
+        }
+        else
         {
             Label errorLabel = new Label("ERROR, PLEASE MAKE SURE YOUR\nX ACTUALLY HAS DATA");
             errorLabel.setFont(Font.font("Comic Sans MS", 30));
@@ -400,7 +402,7 @@ public class Main extends Application
 
             seriesBestFit.getData().add(new XYChart.Data<>(statCalcX.getData()[0], statCalcX.getData()[0] * bconst + a));
             seriesBestFit.getData().add(new XYChart.Data<>(statCalcX.getData()[statCalcX.getData().length - 1], statCalcX.getData()[statCalcX.getData().length - 1] * bconst + a));
-            seriesBestFit.setName("Y = " + (float)a + " + " +(float)bconst + "X");
+            seriesBestFit.setName("Y = " + (float) a + " + " + (float) bconst + "X");
             lineChart.getData().addAll(seriesBestFit);
             lineChart.setOpacity(.6);
 
