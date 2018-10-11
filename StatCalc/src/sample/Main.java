@@ -319,8 +319,6 @@ public class Main extends Application
                     maxoccurences = occurencesOverIntervals[i];
             }
 
-            double heightScaling = (maxPosY - minPosY) / maxoccurences;
-
             for (int i = 0; i < bars; i++)
             {
                 barArray[i] = new Rectangle(minPosX + (double) i / bars * (maxPosX - minPosX), maxPosY - 29 * occurencesOverIntervals[i], (maxPosX - minPosX) / (bars), 29 * occurencesOverIntervals[i]);
