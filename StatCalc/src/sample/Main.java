@@ -21,7 +21,6 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
 public class Main extends Application
@@ -41,6 +40,10 @@ public class Main extends Application
         statCalcX = new StatCalcLogic(new double[]{0.0});
         userInputtedArrayListX = new ArrayList<>();
         userInputtedArrayListY = new ArrayList<>();
+        for (double i = 0; i < 10; i++)
+        {
+            userInputtedArrayListX.add(i);
+        }
 
         menuPane = new Pane();
         menuScene = new Scene(menuPane, 300, 300);
@@ -302,22 +305,40 @@ public class Main extends Application
             Label[] barLabelArray = new Label[bars];
             int[] occurencesOverIntervals = new int[bars];
 
-            for (double num : data)
+            if (data[0] > 0)
             {
-                try
+                for (double num : data)
                 {
-                    occurencesOverIntervals[(int) ((num) / intervals)]++;
-                } catch (Exception e)
+                    try
+                    {
+                        occurencesOverIntervals[(int) ((num) / intervals)]++;
+                    }
+                    catch (Exception e)
+                    {
+                        occurencesOverIntervals[occurencesOverIntervals.length - 1]++;
+                    }
+                }
+            }
+            else
+            {
+                for (double num : data)
                 {
-                    occurencesOverIntervals[occurencesOverIntervals.length - 1]++;
+                    try
+                    {
+                        occurencesOverIntervals[(int) (((num)- data[0]) / intervals)]++;
+                    }
+                    catch (Exception e)
+                    {
+                        occurencesOverIntervals[occurencesOverIntervals.length - 1]++;
+                    }
                 }
             }
 
             int maxoccurences = 0;
-            for (int i = 0; i < occurencesOverIntervals.length; i++)
+            for (int i : occurencesOverIntervals)
             {
-                if (maxoccurences < occurencesOverIntervals[i])
-                    maxoccurences = occurencesOverIntervals[i];
+                if (maxoccurences < i)
+                    maxoccurences = i;
             }
 
             for (int i = 0; i < bars; i++)
