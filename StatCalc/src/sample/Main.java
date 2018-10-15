@@ -40,10 +40,6 @@ public class Main extends Application
         statCalcX = new StatCalcLogic(new double[]{0.0});
         userInputtedArrayListX = new ArrayList<>();
         userInputtedArrayListY = new ArrayList<>();
-        for (double i = 0; i < 10; i++)
-        {
-            userInputtedArrayListX.add(i);
-        }
 
         menuPane = new Pane();
         menuScene = new Scene(menuPane, 300, 300);
