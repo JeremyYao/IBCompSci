@@ -30,7 +30,7 @@ public class MenuStage extends Stage
     {
         GridPane gridPaneOptionSel = new GridPane();
         Scene sceneOptionSel = new Scene(gridPaneOptionSel);
-
         this.setScene(sceneOptionSel);
+
     }
 }

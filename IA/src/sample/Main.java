@@ -11,7 +11,8 @@ public class Main extends Application
     {
         menuStage = new MenuStage(400,400);
     }
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch(args);
     }
 }
