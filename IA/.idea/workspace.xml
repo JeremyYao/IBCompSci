@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="1/6 Add in fields for initializing particle objects and IA forms">
+      <change afterPath="$PROJECT_DIR$/Forms/Documentation/Appendix.odt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Forms/Documentation/Appendix.rtf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Forms/Documentation/Crit_A_Planning.rtf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Forms/Documentation/Crit_B_Design.rtf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Forms/Documentation/Crit_B_Record_of_tasks.odt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Forms/Documentation/Crit_B_Record_of_tasks.rtf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Forms/Documentation/Crit_C_Development.odt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Forms/Documentation/Crit_C_Development.rtf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Forms/Documentation/Crit_E_Evaluation.odt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Forms/Documentation/Crit_E_Evaluation.rtf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Forms/cover_page.htm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/IA/META-INF/IA.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/IA/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/IA/sample/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/IA/sample/MenuStage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/IA/sample/MenuStage.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/MenuStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/MenuStage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Particle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Particle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/SimulationStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/SimulationStage.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -67,7 +76,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
+            <state relative-caret-position="204">
               <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -81,8 +90,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/MenuStage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="34" column="68" selection-start-line="34" selection-start-column="68" selection-end-line="34" selection-end-column="68" />
+            <state relative-caret-position="230">
+              <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -91,13 +100,21 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/javafx-src.zip!/javafx/event/EventHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/SimulationStage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="16" lean-forward="true" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+            <state relative-caret-position="119">
+              <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
               <folding>
-                <element signature="e#123#124#0" expanded="true" />
-                <element signature="e#146#147#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -106,24 +123,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Particle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="845">
-              <caret line="149" column="5" lean-forward="true" selection-start-line="149" selection-start-column="5" selection-end-line="149" selection-end-column="5" />
+            <state relative-caret-position="536">
+              <caret line="47" column="36" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3188#3189#0" expanded="true" />
-                <element signature="e#3284#3285#0" expanded="true" />
-                <element signature="e#3380#3381#0" expanded="true" />
-                <element signature="e#3464#3465#0" expanded="true" />
-                <element signature="e#3548#3549#0" expanded="true" />
-                <element signature="e#3883#3884#0" expanded="true" />
-                <element signature="e#3945#3946#0" expanded="true" />
-                <element signature="e#4017#4018#0" expanded="true" />
-                <element signature="e#4089#4090#0" expanded="true" />
-                <element signature="e#4155#4156#0" expanded="true" />
-                <element signature="e#4221#4222#0" expanded="true" />
-                <element signature="e#4293#4294#0" expanded="true" />
-                <element signature="e#4365#4366#0" expanded="true" />
-                <element signature="e#4422#4423#0" expanded="true" />
+                <element signature="e#3141#3142#0" expanded="true" />
+                <element signature="e#3173#3174#0" expanded="true" />
+                <element signature="e#3227#3228#0" expanded="true" />
+                <element signature="e#3269#3270#0" expanded="true" />
+                <element signature="e#3323#3324#0" expanded="true" />
+                <element signature="e#3365#3366#0" expanded="true" />
+                <element signature="e#3413#3414#0" expanded="true" />
+                <element signature="e#3449#3450#0" expanded="true" />
+                <element signature="e#3497#3498#0" expanded="true" />
+                <element signature="e#3533#3534#0" expanded="true" />
+                <element signature="e#3838#3839#0" expanded="true" />
+                <element signature="e#3868#3869#0" expanded="true" />
+                <element signature="e#3903#3904#0" expanded="true" />
+                <element signature="e#3930#3931#0" expanded="true" />
+                <element signature="e#3970#3971#0" expanded="true" />
+                <element signature="e#4002#4003#0" expanded="true" />
+                <element signature="e#4042#4043#0" expanded="true" />
+                <element signature="e#4074#4075#0" expanded="true" />
+                <element signature="e#4111#4112#0" expanded="true" />
+                <element signature="e#4140#4141#0" expanded="true" />
+                <element signature="e#4177#4178#0" expanded="true" />
+                <element signature="e#4206#4207#0" expanded="true" />
+                <element signature="e#4246#4247#0" expanded="true" />
+                <element signature="e#4278#4279#0" expanded="true" />
+                <element signature="e#4318#4319#0" expanded="true" />
+                <element signature="e#4350#4351#0" expanded="true" />
+                <element signature="e#4381#4382#0" expanded="true" />
+                <element signature="e#4407#4408#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -132,7 +163,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/lang/Math.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
+            <state relative-caret-position="9962">
               <caret line="642" column="25" selection-start-line="642" selection-start-column="25" selection-end-line="642" selection-end-column="25" />
             </state>
           </provider>
@@ -149,12 +180,12 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
               <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
             </state>
           </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
     </leaf>
@@ -189,17 +220,17 @@
       <list>
         <option value="$PROJECT_DIR$/src/sample/MenuScene.java" />
         <option value="$PROJECT_DIR$/src/sample/Controller.java" />
-        <option value="$PROJECT_DIR$/src/sample/SimulationStage.java" />
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
         <option value="$PROJECT_DIR$/src/sample/Particle.java" />
+        <option value="$PROJECT_DIR$/src/sample/SimulationStage.java" />
         <option value="$PROJECT_DIR$/src/sample/MenuStage.java" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="380" />
-    <option name="y" value="293" />
+    <option name="x" value="295" />
+    <option name="y" value="135" />
     <option name="width" value="697" />
     <option name="height" value="775" />
   </component>
@@ -212,6 +243,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -231,11 +263,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="sample" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="IA" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -248,7 +283,7 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548698032500" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549389385820" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="recentsLimit" value="5" />
@@ -360,18 +395,31 @@
       <workItem from="1548349694700" duration="1467000" />
       <workItem from="1548351326362" duration="1375000" />
       <workItem from="1548436891946" duration="2171000" />
-      <workItem from="1548695358166" duration="2542000" />
+      <workItem from="1548695358166" duration="2780000" />
+      <workItem from="1548781720846" duration="59000" />
+      <workItem from="1548781921291" duration="2720000" />
+      <workItem from="1549300123368" duration="1739000" />
+      <workItem from="1549388383517" duration="952000" />
+      <workItem from="1549475147545" duration="1260000" />
     </task>
+    <task id="LOCAL-00001" summary="1/28 add in random COlor Generator for particles and added gui (circle) part of particle">
+      <created>1548698254914</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1548698254914</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14857000" />
+    <option name="totallyTimeSpent" value="21825000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.14901665" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.077912256" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -380,8 +428,8 @@
       <window_info id="UI Designer" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33794162" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33794162" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39938557" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -391,7 +439,7 @@
       <window_info anchor="bottom" id="Changes" order="10" />
       <window_info anchor="bottom" id="Profiler" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.32872504" />
+      <window_info active="true" anchor="bottom" id="Messages" order="13" visible="true" weight="0.32872504" />
       <window_info anchor="bottom" id="Docker" order="14" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="15" />
       <window_info anchor="bottom" id="Terminal" order="16" />
@@ -412,8 +460,10 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <MESSAGE value="1/28 add in random COlor Generator for particles and added gui (circle) part of particle" />
+    <MESSAGE value="1/6 Add in fields for initializing particle objects and IA forms" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/6 Add in fields for initializing particle objects and IA forms" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -421,31 +471,9 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/sample/MenuScene.java" />
-    <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/lang/Math.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="642" column="25" selection-start-line="642" selection-start-column="25" selection-end-line="642" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="204">
           <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -455,45 +483,87 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/javafx-src.zip!/javafx/event/EventHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/lang/Math.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9962">
+          <caret line="642" column="25" selection-start-line="642" selection-start-column="25" selection-end-line="642" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/SimulationStage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="16" lean-forward="true" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+        <state relative-caret-position="119">
+          <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
           <folding>
-            <element signature="e#123#124#0" expanded="true" />
-            <element signature="e#146#147#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Particle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="845">
-          <caret line="149" column="5" lean-forward="true" selection-start-line="149" selection-start-column="5" selection-end-line="149" selection-end-column="5" />
+        <state relative-caret-position="536">
+          <caret line="47" column="36" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3188#3189#0" expanded="true" />
-            <element signature="e#3284#3285#0" expanded="true" />
-            <element signature="e#3380#3381#0" expanded="true" />
-            <element signature="e#3464#3465#0" expanded="true" />
-            <element signature="e#3548#3549#0" expanded="true" />
-            <element signature="e#3883#3884#0" expanded="true" />
-            <element signature="e#3945#3946#0" expanded="true" />
-            <element signature="e#4017#4018#0" expanded="true" />
-            <element signature="e#4089#4090#0" expanded="true" />
-            <element signature="e#4155#4156#0" expanded="true" />
-            <element signature="e#4221#4222#0" expanded="true" />
-            <element signature="e#4293#4294#0" expanded="true" />
-            <element signature="e#4365#4366#0" expanded="true" />
-            <element signature="e#4422#4423#0" expanded="true" />
+            <element signature="e#3141#3142#0" expanded="true" />
+            <element signature="e#3173#3174#0" expanded="true" />
+            <element signature="e#3227#3228#0" expanded="true" />
+            <element signature="e#3269#3270#0" expanded="true" />
+            <element signature="e#3323#3324#0" expanded="true" />
+            <element signature="e#3365#3366#0" expanded="true" />
+            <element signature="e#3413#3414#0" expanded="true" />
+            <element signature="e#3449#3450#0" expanded="true" />
+            <element signature="e#3497#3498#0" expanded="true" />
+            <element signature="e#3533#3534#0" expanded="true" />
+            <element signature="e#3838#3839#0" expanded="true" />
+            <element signature="e#3868#3869#0" expanded="true" />
+            <element signature="e#3903#3904#0" expanded="true" />
+            <element signature="e#3930#3931#0" expanded="true" />
+            <element signature="e#3970#3971#0" expanded="true" />
+            <element signature="e#4002#4003#0" expanded="true" />
+            <element signature="e#4042#4043#0" expanded="true" />
+            <element signature="e#4074#4075#0" expanded="true" />
+            <element signature="e#4111#4112#0" expanded="true" />
+            <element signature="e#4140#4141#0" expanded="true" />
+            <element signature="e#4177#4178#0" expanded="true" />
+            <element signature="e#4206#4207#0" expanded="true" />
+            <element signature="e#4246#4247#0" expanded="true" />
+            <element signature="e#4278#4279#0" expanded="true" />
+            <element signature="e#4318#4319#0" expanded="true" />
+            <element signature="e#4350#4351#0" expanded="true" />
+            <element signature="e#4381#4382#0" expanded="true" />
+            <element signature="e#4407#4408#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/MenuStage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="34" column="68" selection-start-line="34" selection-start-column="68" selection-end-line="34" selection-end-column="68" />
+        <state relative-caret-position="230">
+          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
