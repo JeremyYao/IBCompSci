@@ -20,7 +20,6 @@ public class MenuStage extends Stage
     private Scene menuScene;
     private int numParticles = 0, currentParticleIndex = 0;
     private double[][] particleInitFieldsPassArry;
-    private String lastComboBoxOption = "";
 
     public MenuStage(double w, double h)
     {
@@ -89,7 +88,6 @@ public class MenuStage extends Stage
             gridPaneOptionSel.setConstraints(planetInfoFields[i], 1, 2 + i);
 
             final int temp = i;
-            System.out.println(temp);
             planetInfoFields[i].setOnKeyTyped(event ->
             {
                 try

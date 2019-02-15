@@ -3,8 +3,6 @@ package sample;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
-import java.util.Collection;
-
 public class Particle extends Circle
 {
     private double mass = 1;
@@ -14,7 +12,6 @@ public class Particle extends Circle
     private double accelY = 0;
     private double positionX = 0;
     private double positionY = 0;
-    private static int fps = 60;
     public static final double UNIVERSAL_GRAVITATIONAL_CONST = 6.67408 * Math.pow(10,-11);
     public final double PARTICLE_ID;
 
@@ -68,14 +65,14 @@ public class Particle extends Circle
         return finalColorHex;
     }
 
-    private void updateAcceleration(Collection<Particle> allParticles)
+    private void updateAcceleration(Particle[] allParticles)
     {
         accelX = 0;
         accelY = 0;
 
         for (Particle temp : allParticles)
         {
-            if (temp.PARTICLE_ID != PARTICLE_ID)
+            if (temp.PARTICLE_ID != this.PARTICLE_ID)
             {
                 double magDist = Math.sqrt(Math.pow(positionX - temp.getPositionX(), 2) + Math.pow(positionY - temp.getPositionY(), 2));
                 double forceGrav = UNIVERSAL_GRAVITATIONAL_CONST * mass * temp.getMass() / Math.pow(magDist, 2);
@@ -84,24 +81,23 @@ public class Particle extends Circle
                 accelX += Math.cos(angleBtwn) * forceGrav / mass;
             }
         }
+
+        System.out.println("Accel x " + accelX);
     }
 
     private void updateVelocities()
     {
-        velocityX += accelX/fps;
-        velocityY += accelY/fps;
+        velocityX += accelX/60.0;
+        velocityY += accelY/60.0;
     }
 
-    public void updatePosition(Collection<Particle> allParticles)
+    public void updatePosition(Particle[] allParticles)
     {
         updateAcceleration(allParticles);
         updateVelocities();
 
-        positionX += velocityX * 1/fps;
-        positionY += velocityY * 1/fps;
-
-        super.setCenterX(positionX);
-        super.setCenterY(positionY);
+        positionX += velocityX * 1/60.0;
+        positionY += velocityY * 1/60.0;
     }
 
     public void setMass(double mass)
@@ -132,18 +128,11 @@ public class Particle extends Circle
     public void setPositionX(double positionX)
     {
         this.positionX = positionX;
-        super.setCenterX(positionX);
     }
 
     public void setPositionY(double positionY)
     {
         this.positionY = positionY;
-        super.setCenterY(positionY);
-    }
-
-    public void setFps(int fps)
-    {
-        this.fps = fps;
     }
 
     public double getMass()
@@ -179,10 +168,5 @@ public class Particle extends Circle
     public double getPositionY()
     {
         return positionY;
-    }
-
-    public int getFps()
-    {
-        return fps;
     }
 }
