@@ -28,8 +28,6 @@ public class SimulationStage extends Stage
         for (int i = 0; i < allParticles.length; i++)
             allParticles[i] = new Particle(inputPlanetFields[i][0], inputPlanetFields[i][1], inputPlanetFields[i][2], inputPlanetFields[i][3], inputPlanetFields[i][4]);
 
-        printPlanetInfo();
-
         this.setOnCloseRequest(event ->
         {
             timeline.stop();
@@ -39,22 +37,11 @@ public class SimulationStage extends Stage
         run();
     }
 
-    private void printPlanetInfo()
-    {
-        System.out.println("IN planetinfo");
-        System.out.println(allParticles.length);
-        for(int j = 0; j < allParticles.length; j++)
-        {
-            System.out.println(allParticles[j].getMass());
-            System.out.println(allParticles[j].getVelocityX());
-        }
-    }
-
     private void run()
     {
         simPane.getChildren().addAll(allParticles);
 
-        timeline = new Timeline(new KeyFrame(Duration.seconds(1.0/60.0), event ->
+        timeline = new Timeline(new KeyFrame(Duration.millis(1000.0/60.0), event ->
         {
             for (Particle temp : allParticles)
             {

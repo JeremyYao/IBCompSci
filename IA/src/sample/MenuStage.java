@@ -71,7 +71,7 @@ public class MenuStage extends Stage
          * /
          */
 
-        String[] particleInfoArry = {"Mass (kg): ", "Init Vel X (m/s): ", "Init Vel Y (m/s): ", "Init Pos X (m): ", "Init Pos Y (m): "};
+        String[] particleInfoArry = {"Mass (kg * 10^15): ", "Init Vel X (m/s): ", "Init Vel Y (m/s): ", "Init Pos X (m): ", "Init Pos Y (m): "};
         Label[] planetInfoLabels = new Label[particleInfoArry.length];
         TextField[] planetInfoFields = new TextField[particleInfoArry.length];
 
@@ -173,6 +173,21 @@ public class MenuStage extends Stage
 
     private void createSim()
     {
-        SimulationStage simulationStage = new SimulationStage(particleInitFieldsPassArry);
+        double[][] particlePassTemp = new double[particleInitFieldsPassArry.length][particleInitFieldsPassArry[0].length];
+
+        for (int i = 0; i < particlePassTemp.length; i++)
+        {
+            for (int ii = 0; ii < particlePassTemp[0].length; ii++)
+            {
+                particlePassTemp[i][ii] = particleInitFieldsPassArry[i][ii];
+            }
+        }
+
+        for (int i = 0; i < particlePassTemp.length; i++)
+        {
+            particlePassTemp[i][0] *= 1000000000000000.0;
+            System.out.println( particlePassTemp[i][0]);
+        }
+        SimulationStage simulationStage = new SimulationStage(particlePassTemp);
     }
 }

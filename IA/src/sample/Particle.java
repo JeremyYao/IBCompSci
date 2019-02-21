@@ -17,7 +17,7 @@ public class Particle extends Circle
 
     public Particle(double mass, double velocityX, double velocityY, double posX, double posY)
     {
-        super(posX, posY, 5);
+        super(posX, posY, 3);
         super.setFill(Paint.valueOf(generateRandomHexColor()));
         this.mass = mass;
         this.velocityX = velocityX;
@@ -74,21 +74,23 @@ public class Particle extends Circle
         {
             if (temp.PARTICLE_ID != this.PARTICLE_ID)
             {
-                double magDist = Math.sqrt(Math.pow(positionX - temp.getPositionX(), 2) + Math.pow(positionY - temp.getPositionY(), 2));
-                double forceGrav = UNIVERSAL_GRAVITATIONAL_CONST * mass * temp.getMass() / Math.pow(magDist, 2);
-                double angleBtwn = Math.atan2(temp.getPositionY() - positionY, temp.getPositionX() - positionX);
-                accelY += Math.sin(angleBtwn) * forceGrav / mass;
-                accelX += Math.cos(angleBtwn) * forceGrav / mass;
+                double magDist = Math.sqrt((this.positionX - temp.getPositionX()) * (this.positionX - temp.getPositionX()) + (this.positionY - temp.getPositionY()) * (this.positionY - temp.getPositionY()));
+                double angleBtwn = Math.atan2(temp.getPositionY() - this.positionY, temp.getPositionX() - this.positionX);
+                accelY += Math.sin(angleBtwn) * UNIVERSAL_GRAVITATIONAL_CONST * temp.getMass() / magDist / magDist;
+                accelX += Math.cos(angleBtwn) * UNIVERSAL_GRAVITATIONAL_CONST * temp.getMass() / magDist / magDist;
             }
         }
 
-        System.out.println("Accel x " + accelX);
+        //System.out.println("accel x and y " + accelX + " " + accelY);
     }
 
     private void updateVelocities()
     {
         velocityX += accelX/60.0;
         velocityY += accelY/60.0;
+
+//        System.out.println("velocity x " + velocityX);
+//        System.out.println("velocity x " + velocityY);
     }
 
     public void updatePosition(Particle[] allParticles)
@@ -96,8 +98,11 @@ public class Particle extends Circle
         updateAcceleration(allParticles);
         updateVelocities();
 
-        positionX += velocityX * 1/60.0;
-        positionY += velocityY * 1/60.0;
+        positionX += velocityX/60.0;
+        positionY += velocityY/60.0;
+
+//        System.out.println("pos x " + positionX);
+//        System.out.println("pos y " + positionY);
     }
 
     public void setMass(double mass)
