@@ -19,10 +19,11 @@ public class SimulationStage extends Stage
     {
         super();
         simPane = new Pane();
-        simScene = new Scene(simPane, Paint.valueOf("#000000"));
+        simScene = new Scene(simPane, 700,700, Paint.valueOf("#000000"));
         this.setScene(simScene);
         this.setTitle("Simulation");
         this.show();
+        this.setAlwaysOnTop(true);
         allParticles = new Particle[inputPlanetFields.length];
 
         for (int i = 0; i < allParticles.length; i++)
@@ -46,7 +47,7 @@ public class SimulationStage extends Stage
             for (Particle temp : allParticles)
             {
                 temp.updatePosition(allParticles);
-                temp.relocate(temp.getPositionX(), temp.getPositionY());
+                temp.relocate(temp.getPositionX(), 700 - temp.getPositionY());
             }
         }));
 

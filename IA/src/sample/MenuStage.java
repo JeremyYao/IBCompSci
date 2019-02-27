@@ -1,5 +1,6 @@
 package sample;
 
+import com.sun.javafx.scene.control.skin.IntegerFieldSkin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -11,19 +12,27 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MenuStage extends Stage
 {
     private Scene menuScene;
     private int numParticles = 0, currentParticleIndex = 0;
     private double[][] particleInitFieldsPassArry;
+    private String[] particleInfoArry = {"Mass (kg * 10^15): ", "Init Vel X (m/s): ", "Init Vel Y (m/s): ", "Init Pos X (m): ", "Init Pos Y (m): "};
 
     public MenuStage(double w, double h)
     {
         super();
+
         GridPane menuGridPane = new GridPane();
         menuGridPane.setAlignment(Pos.CENTER);
 
@@ -71,7 +80,6 @@ public class MenuStage extends Stage
          * /
          */
 
-        String[] particleInfoArry = {"Mass (kg * 10^15): ", "Init Vel X (m/s): ", "Init Vel Y (m/s): ", "Init Pos X (m): ", "Init Pos Y (m): "};
         Label[] planetInfoLabels = new Label[particleInfoArry.length];
         TextField[] planetInfoFields = new TextField[particleInfoArry.length];
 
@@ -116,7 +124,6 @@ public class MenuStage extends Stage
             {
                 if (Integer.parseInt(fieldNumParticles.getText()) >= 1)
                 {
-
                     numParticles = Integer.parseInt(fieldNumParticles.getText());
                     particleInitFieldsPassArry = new double[numParticles][particleInfoArry.length];
 
@@ -167,6 +174,8 @@ public class MenuStage extends Stage
                 }
         );
 
+        createReadCSVButton(gridPaneOptionSel);
+
         menuScene = new Scene(gridPaneOptionSel);
         this.setScene(menuScene);
     }
@@ -186,8 +195,81 @@ public class MenuStage extends Stage
         for (int i = 0; i < particlePassTemp.length; i++)
         {
             particlePassTemp[i][0] *= 1000000000000000.0;
-            System.out.println( particlePassTemp[i][0]);
         }
         SimulationStage simulationStage = new SimulationStage(particlePassTemp);
+    }
+
+    private void createReadCSVButton(GridPane gridPaneOptionSel)
+    {
+        Button readCSVButton = new Button("CREATE SIM FROM CSV");
+        readCSVButton.setVisible(true);
+        gridPaneOptionSel.getChildren().add(readCSVButton);
+        gridPaneOptionSel.setConstraints(readCSVButton, 0, particleInfoArry.length+3);
+
+        readCSVButton.setOnAction(event ->
+        {
+            FileChooser csvFileChooser = new FileChooser();
+            csvFileChooser.setTitle("Choose valid CSV file");
+            csvFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
+            File csvFile = csvFileChooser.showOpenDialog(this);
+            if(csvFile != null)
+            {
+                handleCSVFile(csvFile);
+            }
+        });
+    }
+
+    private void handleCSVFile (File csvFile)
+    {
+        List<List<String>> lines = new ArrayList<>();
+        try
+        {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(csvFile));
+            String currentLine;
+            while ((currentLine = bufferedReader.readLine()) != null)
+            {
+                String[] values = currentLine.split(",");
+                lines.add(Arrays.asList(values));
+            }
+
+            ArrayList<Integer> validIndexes = getIndexesOfValidLinesFromCSV(lines);
+            particleInitFieldsPassArry = new double[validIndexes.size()][particleInfoArry.length];
+
+            for (int i = 0; i < particleInitFieldsPassArry.length; i++)
+            {
+                for (int j = 0; j < particleInitFieldsPassArry[0].length; j++)
+                    particleInitFieldsPassArry[i][j] = Double.parseDouble(lines.get(validIndexes.get(i)).get(j));
+            }
+
+            createSim();
+        }
+        catch (Exception e)
+        {
+
+        }
+    }
+
+    private ArrayList<Integer> getIndexesOfValidLinesFromCSV(List<List<String>> lines)
+    {
+        ArrayList<Integer> validIndexes = new ArrayList<>();
+
+        for (int i = 0; i < lines.size(); i++)
+        {
+            if(lines.get(i).size() == particleInfoArry.length)
+            {
+                try
+                {
+                    for (int j = 0; j < lines.get(0).size(); j++)
+                        Double.parseDouble(lines.get(i).get(j));
+
+                    validIndexes.add(i);
+                }
+                catch (Exception e)
+                {
+
+                }
+            }
+        }
+        return validIndexes;
     }
 }
