@@ -96,7 +96,7 @@ public class Particle extends Circle
         positionX += velocityX/60.0;
         positionY += velocityY/60.0;
 
-        this.relocate(positionX, 700 - positionY);
+        this.relocate(positionX, 695 - positionY);
     }
 
     public void setMass(double mass)
