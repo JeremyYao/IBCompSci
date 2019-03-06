@@ -9,29 +9,28 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
-public class SimulationStage extends Stage
+public class SimulationWindow extends Stage
 {
     private Timeline timeline;
     private Scene simScene;
     private Pane simPane;
     private Particle[] allParticles;
 
-    public SimulationStage(double [][] inputPlanetFields)
+    public SimulationWindow(double [][] inputPlanetFields)
     {
-        super();
         simPane = new Pane();
         simScene = new Scene(simPane, 700,700, Paint.valueOf("#000000"));
 
-        this.setScene(simScene);
-        this.setTitle("Simulation");
-        this.show();
-        this.setAlwaysOnTop(true);
+        setScene(simScene);
+        setTitle("Simulation");
+        show();
+        setAlwaysOnTop(true);
         allParticles = new Particle[inputPlanetFields.length];
 
         for (int i = 0; i < allParticles.length; i++)
             allParticles[i] = new Particle(inputPlanetFields[i][0], inputPlanetFields[i][1], inputPlanetFields[i][2], inputPlanetFields[i][3], inputPlanetFields[i][4]);
 
-        this.setOnCloseRequest(event ->
+        setOnCloseRequest(event ->
         {
             timeline.stop();
             timeline = null;
@@ -47,9 +46,7 @@ public class SimulationStage extends Stage
         timeline = new Timeline(new KeyFrame(Duration.millis(1000.0/60.0), event ->
         {
             for (Particle temp : allParticles)
-            {
                 temp.updatePosition(allParticles);
-            }
         }));
 
         timeline.setCycleCount(Timeline.INDEFINITE);

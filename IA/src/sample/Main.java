@@ -5,11 +5,11 @@ import javafx.stage.Stage;
 
 public class Main extends Application
 {
-    private MenuStage menuStage;
+    private MenuWindow menuWindow;
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        menuStage = new MenuStage(400,400);
+        menuWindow = new MenuWindow(400,400);
     }
 
     public static void main(String[] args)
