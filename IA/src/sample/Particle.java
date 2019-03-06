@@ -80,17 +80,12 @@ public class Particle extends Circle
                 accelX += Math.cos(angleBtwn) * UNIVERSAL_GRAVITATIONAL_CONST * temp.getMass() / magDist / magDist;
             }
         }
-
-        //System.out.println("accel x and y " + accelX + " " + accelY);
     }
 
     private void updateVelocities()
     {
         velocityX += accelX/60.0;
         velocityY += accelY/60.0;
-
-//        System.out.println("velocity x " + velocityX);
-//        System.out.println("velocity x " + velocityY);
     }
 
     public void updatePosition(Particle[] allParticles)
@@ -101,8 +96,7 @@ public class Particle extends Circle
         positionX += velocityX/60.0;
         positionY += velocityY/60.0;
 
-//        System.out.println("pos x " + positionX);
-//        System.out.println("pos y " + positionY);
+        this.relocate(positionX, 700 - positionY);
     }
 
     public void setMass(double mass)

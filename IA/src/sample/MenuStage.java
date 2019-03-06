@@ -1,6 +1,5 @@
 package sample;
 
-import com.sun.javafx.scene.control.skin.IntegerFieldSkin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -29,6 +28,14 @@ public class MenuStage extends Stage
     private double[][] particleInitFieldsPassArry;
     private String[] particleInfoArry = {"Mass (kg * 10^15): ", "Init Vel X (m/s): ", "Init Vel Y (m/s): ", "Init Pos X (m): ", "Init Pos Y (m): "};
 
+    private GridPane gridPaneOptionSel;
+    private Label labelNumParticles,labelCurrentParticle;
+    private Button buttonCreateSim;
+    private TextField fieldNumParticles;
+    private ComboBox<String> particleComboBox;
+    private TextField[] planetInfoFields;
+    private Label[] planetInfoLabels;
+
     public MenuStage(double w, double h)
     {
         super();
@@ -37,12 +44,13 @@ public class MenuStage extends Stage
         menuGridPane.setAlignment(Pos.CENTER);
 
         Button startButton = new Button("Start");
-        startButton.setFont(Font.font("COMIC SANS MS", 44));
+        startButton.setFont(Font.font(60));
+        menuGridPane.add(startButton, 0, 0);
         startButton.setOnAction(event ->
         {
-            initOptionSelect();
+            createMenuGUI();
         });
-        menuGridPane.add(startButton, 0, 0);
+
         this.setHeight(400);
         this.setWidth(400);
         this.setTitle("Start");
@@ -50,38 +58,51 @@ public class MenuStage extends Stage
         this.show();
     }
 
-    public void initOptionSelect()
+    private void createMenuGUI()
     {
-        GridPane gridPaneOptionSel = new GridPane();
+        initMenuGUIComponents();
+        createUserInputHandlers();
+
+        menuScene = new Scene(gridPaneOptionSel);
+        this.setScene(menuScene);
+    }
+
+    private void initMenuGUIComponents()
+    {
+        gridPaneOptionSel = new GridPane();
         gridPaneOptionSel.setAlignment(Pos.CENTER);
         gridPaneOptionSel.setPadding(new Insets(3));
         gridPaneOptionSel.setHgap(10);
         gridPaneOptionSel.setVgap(10);
 
-        Label labelNumParticles = new Label("# of particles: ");
+        labelNumParticles = new Label("# of particles: ");
         gridPaneOptionSel.getChildren().add(labelNumParticles);
         gridPaneOptionSel.setConstraints(labelNumParticles, 0, 0);
 
-        TextField fieldNumParticles = new TextField("0");
+        fieldNumParticles = new TextField("0");
         gridPaneOptionSel.getChildren().add(fieldNumParticles);
         gridPaneOptionSel.setConstraints(fieldNumParticles, 1, 0);
 
-        Label labelCurrentParticle = new Label("Current Particle: ");
+        labelCurrentParticle = new Label("Current Particle: ");
         labelCurrentParticle.setVisible(false);
         gridPaneOptionSel.getChildren().add(labelCurrentParticle);
         gridPaneOptionSel.setConstraints(labelCurrentParticle, 0, 1);
 
-        ComboBox<String> particleComboBox = new ComboBox<>();
+        particleComboBox = new ComboBox<>();
         particleComboBox.setVisible(false);
         gridPaneOptionSel.getChildren().add(particleComboBox);
         gridPaneOptionSel.setConstraints(particleComboBox, 1, 1);
 
-        /**Initialize fields for particle initialization
-         * /
-         */
+        buttonCreateSim = new Button("Create Sim");
+        buttonCreateSim.setVisible(false);
+        gridPaneOptionSel.getChildren().add(buttonCreateSim);
+        gridPaneOptionSel.setConstraints(buttonCreateSim, 0, particleInfoArry.length + 2);
+    }
 
-        Label[] planetInfoLabels = new Label[particleInfoArry.length];
-        TextField[] planetInfoFields = new TextField[particleInfoArry.length];
+    private void createUserInputHandlers()
+    {
+        planetInfoLabels = new Label[particleInfoArry.length];
+        planetInfoFields = new TextField[particleInfoArry.length];
 
         for (int i = 0; i < particleInfoArry.length; i++)
         {
@@ -109,13 +130,9 @@ public class MenuStage extends Stage
             });
         }
 
-        Button buttonCreateSim = new Button("Create Sim");
-        buttonCreateSim.setVisible(false);
-        gridPaneOptionSel.getChildren().add(buttonCreateSim);
-        gridPaneOptionSel.setConstraints(buttonCreateSim, 0, particleInfoArry.length + 2);
         buttonCreateSim.setOnAction(event ->
         {
-            createSim();
+            createSimWindow();
         });
 
         fieldNumParticles.setOnKeyTyped(event ->
@@ -127,7 +144,8 @@ public class MenuStage extends Stage
                     numParticles = Integer.parseInt(fieldNumParticles.getText());
                     particleInitFieldsPassArry = new double[numParticles][particleInfoArry.length];
 
-                    ArrayList<String> tempStringCombo = new ArrayList<>();
+                    ArrayList<String> tempStringParticleIdentifierCombo = new ArrayList<>();
+
                     for (int i = 0; i < particleInfoArry.length; i++)
                     {
                         planetInfoFields[i].setVisible(true);
@@ -136,15 +154,16 @@ public class MenuStage extends Stage
 
                     for (int i = 0; i < numParticles; i++)
                     {
-                        tempStringCombo.add(i + "");
+                        tempStringParticleIdentifierCombo.add(i + "");
 
                         for (int ii = 0; ii < particleInfoArry.length; ii++)
-                            particleInitFieldsPassArry [i][ii] = 0;
+                            particleInitFieldsPassArry[i][ii] = 0;
                     }
+
                     buttonCreateSim.setVisible(true);
                     labelCurrentParticle.setVisible(true);
                     particleComboBox.setVisible(true);
-                    ObservableList tempObList = FXCollections.observableList(tempStringCombo);
+                    ObservableList tempObList = FXCollections.observableList(tempStringParticleIdentifierCombo);
                     particleComboBox.setItems(tempObList);
                 }
             }
@@ -164,38 +183,31 @@ public class MenuStage extends Stage
         particleComboBox.setOnAction(event ->
                 {
                     currentParticleIndex = Integer.parseInt(particleComboBox.getValue());
-                    if(particleComboBox.isVisible())
+
+                    if (particleComboBox.isVisible())
                     {
                         for (int i = 0; i < particleInfoArry.length; i++)
-                        {
                             planetInfoFields[i].setText(particleInitFieldsPassArry[currentParticleIndex][i] + "");
-                        }
                     }
                 }
         );
 
         createReadCSVButton(gridPaneOptionSel);
-
-        menuScene = new Scene(gridPaneOptionSel);
-        this.setScene(menuScene);
     }
 
-    private void createSim()
+    private void createSimWindow()
     {
         double[][] particlePassTemp = new double[particleInitFieldsPassArry.length][particleInitFieldsPassArry[0].length];
 
         for (int i = 0; i < particlePassTemp.length; i++)
         {
             for (int ii = 0; ii < particlePassTemp[0].length; ii++)
-            {
                 particlePassTemp[i][ii] = particleInitFieldsPassArry[i][ii];
-            }
         }
 
         for (int i = 0; i < particlePassTemp.length; i++)
-        {
             particlePassTemp[i][0] *= 1000000000000000.0;
-        }
+
         SimulationStage simulationStage = new SimulationStage(particlePassTemp);
     }
 
@@ -204,7 +216,7 @@ public class MenuStage extends Stage
         Button readCSVButton = new Button("CREATE SIM FROM CSV");
         readCSVButton.setVisible(true);
         gridPaneOptionSel.getChildren().add(readCSVButton);
-        gridPaneOptionSel.setConstraints(readCSVButton, 0, particleInfoArry.length+3);
+        gridPaneOptionSel.setConstraints(readCSVButton, 0, particleInfoArry.length + 3);
 
         readCSVButton.setOnAction(event ->
         {
@@ -212,14 +224,13 @@ public class MenuStage extends Stage
             csvFileChooser.setTitle("Choose valid CSV file");
             csvFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
             File csvFile = csvFileChooser.showOpenDialog(this);
-            if(csvFile != null)
-            {
-                handleCSVFile(csvFile);
-            }
+
+            if (csvFile != null)
+                handleAndCreateSimFromCSVFile(csvFile);
         });
     }
 
-    private void handleCSVFile (File csvFile)
+    private void handleAndCreateSimFromCSVFile(File csvFile)
     {
         List<List<String>> lines = new ArrayList<>();
         try
@@ -241,7 +252,7 @@ public class MenuStage extends Stage
                     particleInitFieldsPassArry[i][j] = Double.parseDouble(lines.get(validIndexes.get(i)).get(j));
             }
 
-            createSim();
+            createSimWindow();
         }
         catch (Exception e)
         {
@@ -255,7 +266,7 @@ public class MenuStage extends Stage
 
         for (int i = 0; i < lines.size(); i++)
         {
-            if(lines.get(i).size() == particleInfoArry.length)
+            if (lines.get(i).size() == particleInfoArry.length)
             {
                 try
                 {

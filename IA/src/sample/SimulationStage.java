@@ -47,7 +47,6 @@ public class SimulationStage extends Stage
             for (Particle temp : allParticles)
             {
                 temp.updatePosition(allParticles);
-                temp.relocate(temp.getPositionX(), 700 - temp.getPositionY());
             }
         }));
 
