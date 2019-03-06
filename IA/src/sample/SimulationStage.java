@@ -8,6 +8,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+
 public class SimulationStage extends Stage
 {
     private Timeline timeline;
@@ -20,6 +21,7 @@ public class SimulationStage extends Stage
         super();
         simPane = new Pane();
         simScene = new Scene(simPane, 700,700, Paint.valueOf("#000000"));
+
         this.setScene(simScene);
         this.setTitle("Simulation");
         this.show();

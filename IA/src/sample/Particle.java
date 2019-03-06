@@ -17,7 +17,7 @@ public class Particle extends Circle
 
     public Particle(double mass, double velocityX, double velocityY, double posX, double posY)
     {
-        super(posX, posY, 3);
+        super(posX, posY, Math.pow(mass/Math.pow(10, 15), 1.0/6) * 4.2);
         super.setFill(Paint.valueOf(generateRandomHexColor()));
         this.mass = mass;
         this.velocityX = velocityX;
