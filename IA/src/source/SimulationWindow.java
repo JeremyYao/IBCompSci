@@ -17,7 +17,7 @@ public class SimulationWindow extends Stage
     private Particle[] allParticles;
 
     /**
-     * Constructs a new SimulationWindow object and displays a window containing a running simulation
+     * Constructs a new SimulationWindow object and creates a new window containing a running simulation
      *
      * @param inputPlanetFields a two dimensional double array of dimension x * 5, where x is an integer greater than 0
      *                          denoting how many Particles to simulate.

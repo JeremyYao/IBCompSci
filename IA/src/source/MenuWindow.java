@@ -26,7 +26,7 @@ public class MenuWindow extends Stage
     private int currentParticleIndex = 0; //Current index of Particle user is giving data for.
 
     //Text for getting user input for each Particle's parameters.
-    private String[] particleParameterLabelsText = {"Mass (kg * 10^15): ", "Init Vel X (m/s): ", "Init Vel Y (m/s): ", "Init Pos X (m): ", "Init Pos Y (m): "};
+    private String[] particleParameterLabelsText = {"Mass (kg * 10^15): ", "Initial Velocity X (m/s): ", "Initial Velocity Y (m/s): ", "Initial Position X (m): ", "Initial Position Y (m): "};
     private TextField[] particleParameterFields;
     private Label[] particleParameterLabels;
     private double[][] particleParameters;
@@ -85,7 +85,7 @@ public class MenuWindow extends Stage
         gridPaneUserInput.setHgap(10);
         gridPaneUserInput.setVgap(10);
 
-        Label labelNumParticles = new Label("# of particles: ");
+        Label labelNumParticles = new Label("Number of Particles: ");
         gridPaneUserInput.getChildren().add(labelNumParticles);
         gridPaneUserInput.setConstraints(labelNumParticles, 0, 0);
 
