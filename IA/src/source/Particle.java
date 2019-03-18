@@ -12,13 +12,14 @@ public class Particle extends Circle
     private double accelY;
     private double positionX;
     private double positionY;
-    private static double updateFreq = 60.0; //Desired frequency updating particle location
+    private static double updateFreq = 60; //Desired frequency updating particle location
     public static final double UNIVERSAL_GRAVITATIONAL_CONSTANT = 6.67408 * Math.pow(10,-11);
-    public final double PARTICLE_ID; //Unique identifier floating point number for particle
+    public final double PARTICLE_ID; //Unique identifying floating point number for particle
 
     /**
      * Constructs a new Particle object representing a particle floating in outer space with a mass, a velocity, and
      * an initial position relative to the origin (0,0) located in the bottom left of the simulation window.
+     *
      * @param mass The mass of the particle in Kilograms.
      * @param velocityX The X component of the particle's velocity
      * @param velocityY The Y component of the particle's velocity
@@ -27,7 +28,12 @@ public class Particle extends Circle
      */
     public Particle(double mass, double velocityX, double velocityY, double posX, double posY)
     {
-        super(posX, posY, Math.pow(mass/Math.pow(10, 15), 1.0/5.5) * 4);
+        super(posX, posY, Math.pow(mass/Math.pow(10, 15), 1.0/5) * 3);
+
+        //set minimum radius
+        if(mass/Math.pow(10, 15) < 1)
+            this.setRadius(3);
+
         setFill(Paint.valueOf(generateRandomHexColor()));
         this.mass = mass;
         this.velocityX = velocityX;
@@ -39,6 +45,7 @@ public class Particle extends Circle
 
     /**
      * Returns a randomly genernated hexadecimal color
+     *
      * @return
      */
     public static String generateRandomHexColor()
@@ -59,6 +66,7 @@ public class Particle extends Circle
     /**
      * Updates the acceleration on the particle, in both the X and Y direction, by calculating all gravitational
      * forces exerted on the current particle by other instances of Particle in the simulation.
+     *
      * @param allParticles array containing all instances of Particle
      */
     private void updateAcceleration(Particle[] allParticles)
@@ -90,7 +98,8 @@ public class Particle extends Circle
     /**
      * Updates the current position of the particle, based on its X and Y components of velocity, and
      * relocates it within the simulation it's running in.
-     * @param allParticles array containing all instances of Particle
+     *
+     *  @param allParticles array containing all instances of Particle
      */
     public void updatePosition(Particle[] allParticles)
     {
@@ -124,5 +133,11 @@ public class Particle extends Circle
 
     public static double getUpdateFreq() {
         return updateFreq;
+    }
+
+    //Setter Methods
+    public static void setUpdateFreq(double updateFreq)
+    {
+        Particle.updateFreq = updateFreq;
     }
 }

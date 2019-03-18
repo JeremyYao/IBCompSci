@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +30,9 @@ public class MenuWindow extends Stage
     private String[] particleParameterLabelsText = {"Mass (kg * 10^15): ", "Initial Velocity X (m/s): ", "Initial Velocity Y (m/s): ", "Initial Position X (m): ", "Initial Position Y (m): "};
     private TextField[] particleParameterFields;
     private Label[] particleParameterLabels;
-    private double[][] particleParameters;
+
+    private double[][] particleParameters; //Store info for initializing instances of Particle in Simulation Windoow.
+    //First dimeension uses currentParticle index and second dimension is for the index what textField it's typed into.
 
     private GridPane gridPaneUserInput;
     private Label labelCurrentParticle;
@@ -269,10 +272,12 @@ public class MenuWindow extends Stage
 
         readCSVButton.setOnAction(event ->
         {
-            //Set parameters so that user can only select .csv files.
+            //Set parameters for file so that user can only select .csv files.
             FileChooser csvFileChooser = new FileChooser();
             csvFileChooser.setTitle("Choose valid CSV file");
             csvFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
+            String currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
+            csvFileChooser.setInitialDirectory(new File(currentPath));
             File csvFile = csvFileChooser.showOpenDialog(this);
 
             //Check to see if user selected a CSV file.

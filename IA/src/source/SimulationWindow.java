@@ -19,7 +19,7 @@ public class SimulationWindow extends Stage
     /**
      * Constructs a new SimulationWindow object and creates a new window containing a running simulation
      *
-     * @param inputPlanetFields a two dimensional double array of dimension x * 5, where x is an integer greater than 0
+     * @param inputPlanetFields a two dimensional double array of dimension [x][5], where x is an integer greater than 0
      *                          denoting how many Particles to simulate.
      *                          Used to initialize all instances of Particle within Particle array allParticles
      */
@@ -50,12 +50,13 @@ public class SimulationWindow extends Stage
     }
 
     /**
-     * Continuously updates the positions of each Particle at a desired frequency (60 Hz) during the duration of
+     * Continuously updates the positions of each Particle at a desired frequency during the duration of
      * the simulation being open on the user's system.
      */
     private void run()
     {
         simPane.getChildren().addAll(allParticles);
+        Particle.setUpdateFreq(60);
 
         timeline = new Timeline(new KeyFrame(Duration.millis(1000.0/Particle.getUpdateFreq()), event ->
         {
