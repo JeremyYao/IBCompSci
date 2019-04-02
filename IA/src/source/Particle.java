@@ -78,10 +78,11 @@ public class Particle extends Circle
         {
             if (temp.PARTICLE_ID != this.PARTICLE_ID)
             {
-                double magDist = Math.sqrt(Math.pow((this.positionX - temp.getPositionX()), 2) +  Math.pow((this.positionY - temp.getPositionY()), 2));
+                double distBtwn = Math.sqrt(Math.pow((this.positionX - temp.getPositionX()), 2)
+                        +  Math.pow((this.positionY - temp.getPositionY()), 2));
                 double angleBtwn = Math.atan2(temp.getPositionY() - this.positionY, temp.getPositionX() - this.positionX);
-                accelY += Math.sin(angleBtwn) * UNIVERSAL_GRAVITATIONAL_CONSTANT * temp.getMass() / Math.pow(magDist, 2);
-                accelX += Math.cos(angleBtwn) * UNIVERSAL_GRAVITATIONAL_CONSTANT * temp.getMass() / Math.pow(magDist, 2);
+                accelY += Math.sin(angleBtwn) * UNIVERSAL_GRAVITATIONAL_CONSTANT * temp.getMass() / Math.pow(distBtwn, 2);
+                accelX += Math.cos(angleBtwn) * UNIVERSAL_GRAVITATIONAL_CONSTANT * temp.getMass() / Math.pow(distBtwn, 2);
             }
         }
     }

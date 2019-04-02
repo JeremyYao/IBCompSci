@@ -27,7 +27,8 @@ public class MenuWindow extends Stage
     private int currentParticleIndex = 0; //Current index of Particle user is giving data for.
 
     //Text for getting user input for each Particle's parameters.
-    private String[] particleParameterLabelsText = {"Mass (kg * 10^15): ", "Initial Velocity X (m/s): ", "Initial Velocity Y (m/s): ", "Initial Position X (m): ", "Initial Position Y (m): "};
+    private String[] particleParameterLabelsText = {"Mass (kg * 10^15): ", "Initial Velocity X (m/s): ",
+            "Initial Velocity Y (m/s): ", "Initial Position X (m): ", "Initial Position Y (m): "};
     private TextField[] particleParameterFields;
     private Label[] particleParameterLabels;
 
@@ -60,7 +61,7 @@ public class MenuWindow extends Stage
 
         setHeight(400);
         setWidth(400);
-        setTitle("Start");
+        setTitle("Menu");
         setScene(new Scene(menuGridPane));
         show();
     }
@@ -71,16 +72,16 @@ public class MenuWindow extends Stage
      */
     private void createMenuGUI()
     {
-        initMenuGUIComponents();
+        initMenuGUIElements();
         createUserInputHandlers();
 
         setScene(new Scene(gridPaneUserInput));
     }
 
     /**
-     * Initialize GUI components for taking user input and particle parameters.
+     * Initialize GUI elements for taking user input and particle parameters.
      */
-    private void initMenuGUIComponents()
+    private void initMenuGUIElements()
     {
         gridPaneUserInput = new GridPane();
         gridPaneUserInput.setAlignment(Pos.CENTER);
@@ -110,18 +111,12 @@ public class MenuWindow extends Stage
         buttonCreateSim.setVisible(false);
         gridPaneUserInput.getChildren().add(buttonCreateSim);
         gridPaneUserInput.setConstraints(buttonCreateSim, 0, particleParameterLabelsText.length + 2);
-    }
 
-    /**
-     * Initialize handlers for GUI components to store, and manipulate user inputted data
-     * and given particle parameters.
-     */
-    private void createUserInputHandlers()
-    {
+        //Create arrays of Labels and Fields associated with particle parameters
         particleParameterLabels = new Label[particleParameterLabelsText.length];
         particleParameterFields = new TextField[particleParameterLabelsText.length];
 
-        //Create labels and fields for getting user input for each particle's parameters.
+        //Initializes GUI elements associated with particle parameters
         for (int i = 0; i < particleParameterLabelsText.length; i++)
         {
             particleParameterLabels[i] = new Label(particleParameterLabelsText[i]);
@@ -133,27 +128,15 @@ public class MenuWindow extends Stage
             particleParameterFields[i].setVisible(false);
             gridPaneUserInput.getChildren().add(particleParameterFields[i]);
             gridPaneUserInput.setConstraints(particleParameterFields[i], 1, 2 + i);
-
-            final int temp = i;
-            //Store user's input for the current selected particle's parameter.
-            particleParameterFields[i].setOnKeyTyped(event ->
-            {
-                try
-                {
-                    particleParameters[currentParticleIndex][temp] = Double.parseDouble(particleParameterFields[temp].getText());
-                }
-                catch (NumberFormatException e)
-                {
-
-                }
-            });
         }
+    }
 
-        buttonCreateSim.setOnAction(event ->
-        {
-            createSimWindow();
-        });
-
+    /**
+     * Initialize handlers for GUI components to store, and manipulate user inputted data
+     * and given particle parameters.
+     */
+    private void createUserInputHandlers()
+    {
         fieldNumParticles.setOnKeyTyped(event ->
         {
             //display user input options for construction multiple instances of Particle
@@ -162,13 +145,13 @@ public class MenuWindow extends Stage
             {
                 if (Integer.parseInt(fieldNumParticles.getText()) >= 1)
                 {
-                    showUserInputOptions();
+                    showUserInputElements();
                 }
             }
             //Hide user input options when number of particles wanted if less than 1 or isn't an integer
             catch (NumberFormatException e)
             {
-                hideUserInputOptions();
+                hideUserInputElements();
             }
         });
 
@@ -186,18 +169,39 @@ public class MenuWindow extends Stage
                 }
         );
 
+        //Store user's input for the current selected particle's parameter.
+        for (int i = 0; i < particleParameterLabelsText.length; i++)
+        {
+            final int temp = i;
+            particleParameterFields[i].setOnKeyTyped(event ->
+            {
+                try
+                {
+                    particleParameters[currentParticleIndex][temp] = Double.parseDouble(particleParameterFields[temp]
+                            .getText());
+                }
+                catch (NumberFormatException e)
+                {
+
+                }
+            });
+        }
+
+        buttonCreateSim.setOnAction(event ->
+        {
+            createSimWindow();
+        });
+
         createReadCSVButton(gridPaneUserInput);
     }
 
     /**
      * Sets visible associated GUI components and input options for constructing the instance(s) of Particle.
      */
-    private void showUserInputOptions()
+    private void showUserInputElements()
     {
         int numParticles = Integer.parseInt(fieldNumParticles.getText());
         particleParameters = new double[numParticles][particleParameterLabelsText.length];
-
-        ArrayList<String> tempComboItemCurrentParticles = new ArrayList<>();
 
         for (int i = 0; i < particleParameterLabelsText.length; i++)
         {
@@ -205,9 +209,11 @@ public class MenuWindow extends Stage
             particleParameterLabels[i].setVisible(true);
         }
 
+        ArrayList<String> tempComboItemCurrentParticles = new ArrayList<>();
         for (int i = 0; i < numParticles; i++)
         {
-            //Create arrayList of numerical Strings strings starting at 0
+            //Create arrayList of numerical Strings strings starting at 0 and ending with
+            //numParticles - 1.
             tempComboItemCurrentParticles.add(i + "");
 
             //Reset all stored values for initializing instance(s) of Particle
@@ -219,6 +225,7 @@ public class MenuWindow extends Stage
         labelCurrentParticle.setVisible(true);
         comboBoxCurrParticle.setVisible(true);
 
+        //Store the numerical Strings as items in the drop down comboBox menu
         ObservableList tempObList = FXCollections.observableList(tempComboItemCurrentParticles);
         comboBoxCurrParticle.setItems(tempObList);
     }
@@ -226,7 +233,7 @@ public class MenuWindow extends Stage
     /**
      * Hides associated GUI components and input options for constructing the instance(s) of Particle.
      */
-    private void hideUserInputOptions()
+    private void hideUserInputElements()
     {
         for (int i = 0; i < particleParameterLabelsText.length; i++)
         {
@@ -325,17 +332,20 @@ public class MenuWindow extends Stage
             }
             else
             {
-                AlertWindow noLinesErrorWindow = new AlertWindow("[!] Error [!]", "Selected CSV has no valid lines!\nPlease try again.");
+                AlertWindow noLinesErrorWindow = new AlertWindow("[!] Error [!]", "Selected CSV has " +
+                        "no valid lines!\nPlease try again.");
             }
         }
         catch (Exception e)
         {
-            AlertWindow noReadErrorWindow = new AlertWindow("[!] Error [!]", "Selected CSV wasn't able to be read\nPlease try again.");
+            AlertWindow noReadErrorWindow = new AlertWindow("[!] Error [!]", "Selected CSV wasn't able " +
+                    "to be read\nPlease try again.");
         }
     }
 
     /**
-     * Determines which lines inside a 2-dimensional list of Strings, from a CSV, that can be used to initialize instances of Particle.
+     * Determines which lines inside a 2-dimensional list of Strings, from a CSV, that can be used to
+     * initialize instances of Particle.
      *
      * @param lines 2-dimensional list of Strings, where the first dimension indicates the line.
      * @return ArrayList<Integer> An arraylist containing all the valid lines that can be used to construct instances
