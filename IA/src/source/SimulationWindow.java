@@ -19,11 +19,11 @@ public class SimulationWindow extends Stage
     /**
      * Constructs a new SimulationWindow object and creates a new window containing a running simulation
      *
-     * @param inputPlanetFields a two dimensional double array of dimension [x][5], where x is an integer greater than 0
+     * @param inputPartParam a two dimensional double array of dimension [x][5], where x is an integer greater than 0
      *                          denoting how many Particles to simulate.
      *                          Used to initialize all instances of Particle within Particle array allParticles
      */
-    public SimulationWindow(double [][] inputPlanetFields)
+    public SimulationWindow(double [][] inputPartParam)
     {
         simPane = new Pane();
         simScene = new Scene(simPane, 700,700, Paint.valueOf("#000000"));
@@ -32,11 +32,12 @@ public class SimulationWindow extends Stage
         setTitle("Simulation");
         show();
         setAlwaysOnTop(true);
-        allParticles = new Particle[inputPlanetFields.length];
+        allParticles = new Particle[inputPartParam.length];
 
         //Initialize all Particles within allParticles needed to be simulated.
         for (int i = 0; i < allParticles.length; i++)
-            allParticles[i] = new Particle(inputPlanetFields[i][0], inputPlanetFields[i][1], inputPlanetFields[i][2], inputPlanetFields[i][3], inputPlanetFields[i][4]);
+            allParticles[i] = new Particle(inputPartParam[i][0], inputPartParam[i][1], inputPartParam[i][2],
+                    inputPartParam[i][3], inputPartParam[i][4]);
 
         //Stops the simulation from running in the background when user
         //closes the window.
